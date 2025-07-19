@@ -1,0 +1,23 @@
+<h2>Predict Attack</h2>
+<form method="post">
+    {% for f in ['sbytes', 'dbytes', 'rate', 'dinpkt', 'tcprtt', 'synack', 'ackdat', 'smean', 'dmean'] %}
+        {{ f }}: <input name="{{ f }}"><br>
+    {% endfor %}
+    <button type="submit">Predict</button>
+</form>
+
+{% if result %}
+    <h3>Prediction Result</h3>
+    <p>Attack Type: {{ result.attack_type }}</p>
+    <p>Binary Label: {{ result.binary_label }} ({{ 'Normal' if result.binary_label == 0 else 'Attack' }})</p>
+{% endif %}
+
+<h4>Model Accuracies</h4>
+<ul>
+    <li>ANN: {{ ann }}</li>
+    <li>CNN: {{ cnn }}</li>
+    <li>RNN: {{ rnn }}</li>
+    <li>LSTM: {{ lstm }}</li>
+</ul>
+
+<a href="/logout">Logout</a>
